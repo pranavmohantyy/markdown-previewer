@@ -16,11 +16,15 @@ def parse_bold(markdown):
 def parse_italic(markdown):
     return markdown.replace('*', '<em>', 1).replace('*', '</em>', 1)
 
-def parse_links(markdown):
-    import re
-    return re.sub(r'\[(.*?)\]\((.*?)\)', r'<a href="\2">\1</a>', markdown)
-
-def parse_images(markdown):
-    import re
-    return re.sub(r'!\[(.*?)\]\((.*?)\)', r'<img src="\2" alt="\1">', markdown)
-
+def parse_table(markdown):
+    lines = markdown.split('\n')
+    html = '<table>\n'
+    for line in lines:
+        if '|' in line:
+            html += '  <tr>\n'
+            cells = line.split('|')
+            for cell in cells:
+                html += f'    <td>{cell.strip()}</td>\n'
+            html += '  </tr>\n'
+    html += '</table>\n'
+    return html
