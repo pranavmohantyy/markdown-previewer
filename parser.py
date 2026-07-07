@@ -20,4 +20,4 @@ def parse_italic(markdown):
 
 
 def wrap_html(content):
-    return f'<!DOCTYPE html><html><head><title>Markdown</title></head><body>{content}</body></html>'
+    return f'<!DOCTYPE html><html><head><title>Markdown Preview</title></head><body>{content}</body></html>'
