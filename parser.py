@@ -10,12 +10,14 @@ def parse_headers(markdown):
             html += f'<h3>{line[4:].strip()}</h3>\n'
     return html
 
+
 def parse_bold(markdown):
     return markdown.replace('**', '<strong>', 1).replace('**', '</strong>', 1)
+
 
 def parse_italic(markdown):
     return markdown.replace('*', '<em>', 1).replace('*', '</em>', 1)
 
-def wrap_html(content):
-    return f'<!DOCTYPE html>\n<html>\n<head>\n    <style>\n        body {{ font-family: Arial, sans-serif; }}\n        h1 {{ color: #333; }}\n        strong {{ font-weight: bold; }}\n        em {{ font-style: italic; }}\n    </style>\n</head>\n<body>\n{content}\n</body>\n</html>'
 
+def wrap_html(content):
+    return f'<!DOCTYPE html><html><head><title>Markdown</title></head><body>{content}</body></html>'
