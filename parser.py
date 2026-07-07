@@ -16,15 +16,6 @@ def parse_bold(markdown):
 def parse_italic(markdown):
     return markdown.replace('*', '<em>', 1).replace('*', '</em>', 1)
 
-def parse_table(markdown):
-    lines = markdown.split('\n')
-    html = '<table>\n'
-    for line in lines:
-        if '|' in line:
-            html += '  <tr>\n'
-            cells = line.split('|')
-            for cell in cells:
-                html += f'    <td>{cell.strip()}</td>\n'
-            html += '  </tr>\n'
-    html += '</table>\n'
-    return html
+def wrap_html(content):
+    return f'<!DOCTYPE html>\n<html>\n<head>\n    <style>\n        body {{ font-family: Arial, sans-serif; }}\n        h1 {{ color: #333; }}\n        strong {{ font-weight: bold; }}\n        em {{ font-style: italic; }}\n    </style>\n</head>\n<body>\n{content}\n</body>\n</html>'
+
