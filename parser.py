@@ -3,11 +3,11 @@ def parse_headers(markdown):
     html = ''
     for line in lines:
         if line.startswith('# '):
-            html += f'<h1>{line[2:].strip()}</h1>\n'
+            html += f'<h1>{{line[2:].strip()}}</h1>\n'
         elif line.startswith('## '):
-            html += f'<h2>{line[3:].strip()}</h2>\n'
+            html += f'<h2>{{line[3:].strip()}}</h2>\n'
         elif line.startswith('### '):
-            html += f'<h3>{line[4:].strip()}</h3>\n'
+            html += f'<h3>{{line[4:].strip()}}</h3>\n'
     return html
 
 
@@ -20,4 +20,4 @@ def parse_italic(markdown):
 
 
 def wrap_html(content):
-    return f'<!DOCTYPE html><html><head><title>Markdown Preview</title></head><body>{content}</body></html>'
+    return f'<!DOCTYPE html><html><head><title>Markdown Preview</title></head><body>{{content}}</body></html>'

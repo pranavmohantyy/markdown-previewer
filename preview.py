@@ -18,22 +18,27 @@ def main():
     parser.add_argument('--watch', action='store_true', help='watch for changes')
     args = parser.parse_args()
 
-    last_mtime = 0
     while True:
-        if os.path.exists(args.input):
-            mtime = os.path.getmtime(args.input)
-            if mtime != last_mtime:
-                last_mtime = mtime
-                with open(args.input, 'r') as f:
-                    markdown_content = f.read()
-                html_content = parse_headers(markdown_content) + parse_bold(markdown_content) + parse_italic(markdown_content)
-                with open(args.output, 'w') as f:
-                    f.write(wrap_html(html_content))
-                if args.open:
-                    webbrowser.open(args.output)
-            if not args.watch:
-                break
-        time.sleep(1)
+        with open(args.input, 'r') as file:
+            markdown = file.read()
+
+        html_content = parse_headers(markdown)
+        html_content += parse_bold(markdown)
+        html_content += parse_italic(markdown)
+
+        html = wrap_html(html_content)
+
+        with open(args.output, 'w') as output_file:
+            output_file.write(html)
+
+        if args.open:
+            webbrowser.open('file://' + os.path.realpath(args.output))
+
+        if not args.watch:
+            break
+
+        time.sleep(2)
+
 
 if __name__ == '__main__':
     main()
